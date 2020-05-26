@@ -31,12 +31,29 @@ class PizzaComponent extends Component {
       })
   }
 
+  renderState = (pizzaArray) => {
+    const updState = pizzaArray.map((pizComp, i) => {
+      return (
+        <div key={i}>
+          {pizComp.name} {pizComp.price}
+        </div>
+      )
+    })
+    return updState
+  }
+
   render() {
+    if (!this.state.pizzaBase) {
+      return <div>Loading Pizza Base</div>
+    }
     return (
       <div>
-        <div>Pizza Base</div>
-        <div>Pizza Sauce</div>
-        <div>Pizza Topping</div>
+        <div>{this.renderState(this.state.pizzaBase)}</div>
+        <br />
+        <div>{this.renderState(this.state.pizzaSauce)}</div>
+        <br />
+        <div>{this.renderState(this.state.pizzaTopping)}</div>
+        <br />
       </div>
     )
   }
