@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import axios from "axios"
+import { fetchResources, renderState } from "../utils/helpers"
 
 class PizzaComponent extends Component {
   state = {
@@ -12,34 +12,13 @@ class PizzaComponent extends Component {
     this.fetchPizzaResources()
   }
 
-  fetchPizzaResources = () => {
-    const axiosOptions = {
-      url: "http://localhost:3000/pizza",
-      method: "GET",
-    }
-
-    axios(axiosOptions)
-      .then((response) => {
-        this.setState({
-          pizzaBase: response.data.pizzaBase,
-          pizzaSauce: response.data.pizzaSauce,
-          pizzaTopping: response.data.pizzaTopping,
-        })
-      })
-      .catch((error) => {
-        return error
-      })
-  }
-
-  renderState = (pizzaArray) => {
-    const updState = pizzaArray.map((pizComp, i) => {
-      return (
-        <div key={i}>
-          {pizComp.name} {pizComp.price}
-        </div>
-      )
+  fetchPizzaResources = async () => {
+    const data = await fetchResources("http://localhost:3000/pizza", "GET")
+    return this.setState({
+      pizzaBase: data.pizzaBase,
+      pizzaSauce: data.pizzaSauce,
+      pizzaTopping: data.pizzaTopping,
     })
-    return updState
   }
 
   render() {
@@ -48,12 +27,12 @@ class PizzaComponent extends Component {
     }
     return (
       <div>
-        <div>{this.renderState(this.state.pizzaBase)}</div>
+        {/* <div>{renderState(this.state.pizzaBase)}</div>
         <br />
-        <div>{this.renderState(this.state.pizzaSauce)}</div>
+        <div>{renderState(this.state.pizzaSauce)}</div>
         <br />
-        <div>{this.renderState(this.state.pizzaTopping)}</div>
-        <br />
+        <div>{renderState(this.state.pizzaTopping)}</div>
+        <br /> */}
       </div>
     )
   }
