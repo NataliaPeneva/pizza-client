@@ -1,11 +1,9 @@
 import React, { Component } from "react"
-import { fetchResources, renderState } from "../utils/helpers"
-import Button from "@material-ui/core/Button"
+import { fetchResources, renderState, renderButton } from "../utils/helpers"
 
 class ExtrasComponent extends Component {
   state = {
     extras: null,
-    basket: [],
   }
 
   componentDidMount() {
@@ -27,20 +25,8 @@ class ExtrasComponent extends Component {
     return this.setState({ extras: data.extras })
   }
 
-  renderButton = (addToBasket, item) => {
-    return (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => addToBasket(item)}
-      >
-        Add To Basket
-      </Button>
-    )
-  }
-
   addToBasket = (item) => {
-    return this.setState({ basket: [...this.state.basket, item] })
+    this.props.addItemToBasket(item)
   }
 
   render() {
@@ -50,14 +36,7 @@ class ExtrasComponent extends Component {
     return (
       <div>
         <div>
-          Basket: €
-          {this.state.basket.reduce((accumulator, currentValue) => {
-            return accumulator + currentValue.price
-          }, 0)}
-        </div>
-        <br />
-        <div>
-          {renderState(this.state.extras, this.renderButton, this.addToBasket)}
+          {renderState(this.state.extras, renderButton, this.addToBasket)}
         </div>
       </div>
     )

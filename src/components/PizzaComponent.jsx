@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { fetchResources, renderState } from "../utils/helpers"
+import { fetchResources, renderState, renderButton } from "../utils/helpers"
 
 class PizzaComponent extends Component {
   state = {
@@ -21,18 +21,29 @@ class PizzaComponent extends Component {
     })
   }
 
+  addToBasket = (item) => {
+    this.props.addItemToBasket(item)
+  }
+
   render() {
     if (!this.state.pizzaBase) {
       return <div>Loading Pizza Base</div>
     }
     return (
       <div>
-        {/* <div>{renderState(this.state.pizzaBase)}</div>
         <br />
-        <div>{renderState(this.state.pizzaSauce)}</div>
+        <div>
+          {renderState(this.state.pizzaBase, renderButton, this.addToBasket)}
+        </div>
         <br />
-        <div>{renderState(this.state.pizzaTopping)}</div>
-        <br /> */}
+        <div>
+          {renderState(this.state.pizzaSauce, renderButton, this.addToBasket)}
+        </div>
+        <br />
+        <div>
+          {renderState(this.state.pizzaTopping, renderButton, this.addToBasket)}
+        </div>
+        <br />
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { fetchResources, renderState } from "../utils/helpers"
+import { fetchResources, renderState, renderButton } from "../utils/helpers"
 
 class ServicesComponent extends Component {
   state = {
@@ -15,12 +15,22 @@ class ServicesComponent extends Component {
     return this.setState({ services: data.services })
   }
 
+  addToBasket = (item) => {
+    this.props.addItemToBasket(item)
+  }
+
   render() {
     if (!this.state.services) {
-      return <div>Loading services</div>
+      return <div>Loading Services</div>
     }
     // return <div>{renderState(this.state.services)}</div>
-    return <div></div>
+    return (
+      <div>
+        <div>
+          {renderState(this.state.services, renderButton, this.addToBasket)}
+        </div>
+      </div>
+    )
   }
 }
 
