@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import { fetchResources, renderState, renderButton } from "../utils/helpers"
+import { Link } from "react-router-dom"
+import Button from "@material-ui/core/Button"
 
 class ExtrasComponent extends Component {
   state = {
@@ -35,9 +37,13 @@ class ExtrasComponent extends Component {
     }
     return (
       <div>
-        <div>
-          {renderState(this.state.extras, renderButton, this.addToBasket)}
-        </div>
+        <div>{renderState(this.state.extras, renderButton, this.addToBasket)}</div>
+        <br />
+        <Link to="/services">
+          <Button variant="contained" color="primary">
+            Choose how to get your pizza!
+          </Button>
+        </Link>
       </div>
     )
   }

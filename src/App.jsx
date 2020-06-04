@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import PizzaComponent from "./components/PizzaComponent"
 import ExtrasComponent from "./components/ExtrasComponent"
 import ServicesComponent from "./components/ServicesComponent"
+import { Switch, Route, Link } from "react-router-dom"
+import Button from "@material-ui/core/Button"
 
 class App extends Component {
   state = {
@@ -15,23 +17,39 @@ class App extends Component {
   render() {
     return (
       <div>
+        <br />
+        <br />
+        <br />
         <div>
           Basket: €
           {this.state.basket.reduce((accumulator, currentValue) => {
             return accumulator + currentValue.price
           }, 0)}
         </div>
-        <div className="App">
-          <PizzaComponent addItemToBasket={this.addItemToBasket} />
-        </div>
-        <br />
-        <div className="App">
-          <ExtrasComponent addItemToBasket={this.addItemToBasket} />
-        </div>
-        <br />
-        <div className="App">
-          <ServicesComponent addItemToBasket={this.addItemToBasket} />
-        </div>
+        <Switch>
+          <Route exact path="/">
+            <Link to="/pizza">
+              <Button variant="contained" color="primary">
+                Make a Pizza
+              </Button>
+            </Link>
+          </Route>
+          <Route
+            exact
+            path="/pizza"
+            render={() => <PizzaComponent addItemToBasket={this.addItemToBasket} />}
+          />
+          <Route
+            exact
+            path="/extras"
+            render={() => <ExtrasComponent addItemToBasket={this.addItemToBasket} />}
+          />
+          <Route
+            exact
+            path="/services"
+            render={() => <ServicesComponent addItemToBasket={this.addItemToBasket} />}
+          />
+        </Switch>
       </div>
     )
   }
