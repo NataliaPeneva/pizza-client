@@ -1,3 +1,4 @@
+import "./App.css"
 import React, { Component } from "react"
 import PizzaComponent from "./components/PizzaComponent"
 import ExtrasComponent from "./components/ExtrasComponent"
@@ -16,40 +17,47 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <br />
-        <br />
-        <br />
-        <div>
-          Basket: €
-          {this.state.basket.reduce((accumulator, currentValue) => {
-            return accumulator + currentValue.price
-          }, 0)}
+      <div className="App">
+        <div style={{ display: "flex", justifyContent: "flex-end", width: "100vw" }}>
+          <div style={{ margin: 50 }}>
+            Basket: €
+            {this.state.basket.reduce((accumulator, currentValue) => {
+              return accumulator + currentValue.price
+            }, 0)}
+          </div>
         </div>
-        <Switch>
-          <Route exact path="/">
-            <Link to="/pizza">
-              <Button variant="contained" color="primary">
-                Make a Pizza
-              </Button>
-            </Link>
-          </Route>
-          <Route
-            exact
-            path="/pizza"
-            render={() => <PizzaComponent addItemToBasket={this.addItemToBasket} />}
-          />
-          <Route
-            exact
-            path="/extras"
-            render={() => <ExtrasComponent addItemToBasket={this.addItemToBasket} />}
-          />
-          <Route
-            exact
-            path="/services"
-            render={() => <ServicesComponent addItemToBasket={this.addItemToBasket} />}
-          />
-        </Switch>
+        <div>
+          <Switch>
+            <Route exact path="/">
+              <Link to="/pizza">
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "#80ed99",
+                    color: "#0b3954",
+                  }}
+                >
+                  Make a Pizza
+                </Button>
+              </Link>
+            </Route>
+            <Route
+              exact
+              path="/pizza"
+              render={() => <PizzaComponent addItemToBasket={this.addItemToBasket} />}
+            />
+            <Route
+              exact
+              path="/extras"
+              render={() => <ExtrasComponent addItemToBasket={this.addItemToBasket} />}
+            />
+            <Route
+              exact
+              path="/services"
+              render={() => <ServicesComponent addItemToBasket={this.addItemToBasket} />}
+            />
+          </Switch>
+        </div>
       </div>
     )
   }

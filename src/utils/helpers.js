@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import Button from "@material-ui/core/Button"
+import { FormHelperText } from "@material-ui/core"
 
 const fetchResources = (url, method) => {
   const axiosOptions = {
@@ -20,8 +21,9 @@ const fetchResources = (url, method) => {
 const renderButton = (addToBasket, item) => {
   return (
     <Button
-      variant="contained"
-      color="primary"
+      variant="outlined"
+      style={{ backgroundColor: "#0b3954", border: "1.5px solid #80ed99", color: "#80ed99" }}
+      size="small"
       onClick={() => addToBasket(item)}
     >
       Add To Basket
@@ -32,8 +34,11 @@ const renderButton = (addToBasket, item) => {
 const renderState = (array, renderButton, addToBasket) => {
   const updState = array.map((item, i) => {
     return (
-      <div key={i}>
-        {item.name} {item.price} {renderButton(addToBasket, item)}
+      <div key={i} style={{ display: "flex" }}>
+        <div style={{ marginRight: 30 }}>
+          {item.name} &nbsp; €{item.price}
+        </div>
+        <div>{renderButton(addToBasket, item)}</div>
       </div>
     )
   })

@@ -40,8 +40,17 @@ class PizzaComponent extends Component {
         <br />
         <div>{renderState(this.state.pizzaTopping, renderButton, this.addToBasket)}</div>
         <br />
+        <br />
+        <br />
         <Link to="/extras">
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#80ed99",
+              color: "#0b3954",
+            }}
+            size="small"
+          >
             Choose some extras!
           </Button>
         </Link>

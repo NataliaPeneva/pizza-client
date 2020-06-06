@@ -39,8 +39,17 @@ class ExtrasComponent extends Component {
       <div>
         <div>{renderState(this.state.extras, renderButton, this.addToBasket)}</div>
         <br />
+        <br />
+        <br />
         <Link to="/services">
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#80ed99",
+              color: "#0b3954",
+              size: "small",
+            }}
+          >
             Choose how to get your pizza!
           </Button>
         </Link>
