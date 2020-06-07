@@ -3,30 +3,11 @@ import { fetchResources, renderState, renderButton } from "../utils/helpers"
 import { Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
 import { connect } from "react-redux"
-import { addToBasketAction } from "../actions"
+import { addToBasketAction, fetchExtras } from "../actions"
 
 class ExtrasComponent extends Component {
-  state = {
-    extras: null,
-  }
-
   componentDidMount() {
-    this.fetchExtras()
-  }
-
-  fetchExtras = async () => {
-    //   Alternative to the async-await
-    // fetchResources("http://localhost:3000/extras", "GET")
-    //   .then((response) => {
-    //     console.log("response from component:", response)
-    //     this.setState({ extras: response.extras })
-    //   })
-    //   .catch((error) => {
-    //     console.log("error", error)
-    //   })
-
-    const data = await fetchResources("http://localhost:3000/extras", "GET")
-    return this.setState({ extras: data.extras })
+    this.props.fetchExtras()
   }
 
   addToBasket = (item) => {
@@ -34,12 +15,12 @@ class ExtrasComponent extends Component {
   }
 
   render() {
-    if (!this.state.extras) {
+    if (!this.props.extras) {
       return <div>Loading Extras</div>
     }
     return (
       <div>
-        <div>{renderState(this.state.extras, renderButton, this.addToBasket)}</div>
+        <div>{renderState(this.props.extras, renderButton, this.addToBasket)}</div>
         <br />
         <br />
         <br />
@@ -60,8 +41,15 @@ class ExtrasComponent extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  addToBasketAction,
+const mapStateToProps = (state) => {
+  return {
+    extras: state.extras,
+  }
 }
 
-export default connect(null, mapDispatchToProps)(ExtrasComponent)
+const mapDispatchToProps = {
+  addToBasketAction,
+  fetchExtras,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExtrasComponent)

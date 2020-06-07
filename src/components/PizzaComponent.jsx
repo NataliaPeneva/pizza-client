@@ -3,26 +3,11 @@ import { fetchResources, renderState, renderButton } from "../utils/helpers"
 import { Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
 import { connect } from "react-redux"
-import { addToBasketAction } from "../actions"
+import { addToBasketAction, fetchPizza } from "../actions"
 
 class PizzaComponent extends Component {
-  state = {
-    pizzaBase: null,
-    pizzaSauce: null,
-    pizzaTopping: null,
-  }
-
   componentDidMount() {
-    this.fetchPizzaResources()
-  }
-
-  fetchPizzaResources = async () => {
-    const data = await fetchResources("http://localhost:3000/pizza", "GET")
-    return this.setState({
-      pizzaBase: data.pizzaBase,
-      pizzaSauce: data.pizzaSauce,
-      pizzaTopping: data.pizzaTopping,
-    })
+    this.props.fetchPizza()
   }
 
   addToBasket = (item) => {
@@ -30,19 +15,13 @@ class PizzaComponent extends Component {
   }
 
   render() {
-    if (!this.state.pizzaBase) {
+    if (!this.props.pizza) {
       return <div>Loading Pizza Base</div>
     }
     return (
       <div>
         <br />
-        <div>{renderState(this.state.pizzaBase, renderButton, this.addToBasket)}</div>
-        <br />
-        <div>{renderState(this.state.pizzaSauce, renderButton, this.addToBasket)}</div>
-        <br />
-        <div>{renderState(this.state.pizzaTopping, renderButton, this.addToBasket)}</div>
-        <br />
-        <br />
+        <div>{renderState(this.props.pizza, renderButton, this.addToBasket)}</div>
         <br />
         <Link to="/extras">
           <Button
@@ -61,8 +40,15 @@ class PizzaComponent extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  addToBasketAction,
+const mapStateToProps = (state) => {
+  return {
+    pizza: state.pizza,
+  }
 }
 
-export default connect(null, mapDispatchToProps)(PizzaComponent)
+const mapDispatchToProps = {
+  addToBasketAction,
+  fetchPizza,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PizzaComponent)
