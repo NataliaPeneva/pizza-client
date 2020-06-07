@@ -1,31 +1,20 @@
 import "./App.css"
 import React, { Component } from "react"
 import PizzaComponent from "./components/PizzaComponent"
-import ExtrasComponent from "./components/ExtrasComponent"
-import ServicesComponent from "./components/ServicesComponent"
 import { Switch, Route, Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
+import { connect } from "react-redux"
+
+import ExtrasComponent from "./components/ExtrasComponent"
+import ServicesComponent from "./components/ServicesComponent"
+import BasketComponent from "./components/BasketComponent"
 
 class App extends Component {
-  state = {
-    basket: [],
-  }
-
-  addItemToBasket = (item) => {
-    return this.setState({ basket: [...this.state.basket, item] })
-  }
-
   render() {
     return (
       <div className="App">
-        <div style={{ display: "flex", justifyContent: "flex-end", width: "100vw" }}>
-          <div style={{ margin: 50 }}>
-            Basket: €
-            {this.state.basket.reduce((accumulator, currentValue) => {
-              return accumulator + currentValue.price
-            }, 0)}
-          </div>
-        </div>
+        <BasketComponent />
+
         <div>
           <Switch>
             <Route exact path="/">
@@ -63,24 +52,4 @@ class App extends Component {
   }
 }
 
-// function App() {
-
-//   return (
-//     <div>
-
-//       <div className="App">
-//         <PizzaComponent />
-//       </div>
-//       <br />
-//       <div className="App">
-//         <ExtrasComponent  />
-//       </div>
-//       <br />
-//       <div className="App">
-//         <ServicesComponent />
-//       </div>
-//     </div>
-//   )
-// }
-
-export default App
+export default connect()(App)

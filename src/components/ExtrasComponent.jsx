@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { fetchResources, renderState, renderButton } from "../utils/helpers"
 import { Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
+import { connect } from "react-redux"
+import { addToBasketAction } from "../actions"
 
 class ExtrasComponent extends Component {
   state = {
@@ -28,7 +30,7 @@ class ExtrasComponent extends Component {
   }
 
   addToBasket = (item) => {
-    this.props.addItemToBasket(item)
+    this.props.addToBasketAction(item)
   }
 
   render() {
@@ -58,4 +60,8 @@ class ExtrasComponent extends Component {
   }
 }
 
-export default ExtrasComponent
+const mapDispatchToProps = {
+  addToBasketAction,
+}
+
+export default connect(null, mapDispatchToProps)(ExtrasComponent)

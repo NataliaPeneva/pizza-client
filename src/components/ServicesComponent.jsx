@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import { fetchResources, renderState, renderButton } from "../utils/helpers"
 import { Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
-
+import { connect } from "react-redux"
+import { addToBasketAction } from "../actions"
 class ServicesComponent extends Component {
   state = {
     services: null,
@@ -18,14 +19,13 @@ class ServicesComponent extends Component {
   }
 
   addToBasket = (item) => {
-    this.props.addItemToBasket(item)
+    this.props.addToBasketAction(item)
   }
 
   render() {
     if (!this.state.services) {
       return <div>Loading Services</div>
     }
-    // return <div>{renderState(this.state.services)}</div>
     return (
       <div>
         <div>{renderState(this.state.services, renderButton, this.addToBasket)}</div>
@@ -49,4 +49,7 @@ class ServicesComponent extends Component {
   }
 }
 
-export default ServicesComponent
+const mapDispatchToProps = {
+  addToBasketAction,
+}
+export default connect(null, mapDispatchToProps)(ServicesComponent)

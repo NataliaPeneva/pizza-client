@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { fetchResources, renderState, renderButton } from "../utils/helpers"
 import { Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
+import { connect } from "react-redux"
+import { addToBasketAction } from "../actions"
 
 class PizzaComponent extends Component {
   state = {
@@ -24,7 +26,7 @@ class PizzaComponent extends Component {
   }
 
   addToBasket = (item) => {
-    this.props.addItemToBasket(item)
+    this.props.addToBasketAction(item)
   }
 
   render() {
@@ -59,4 +61,8 @@ class PizzaComponent extends Component {
   }
 }
 
-export default PizzaComponent
+const mapDispatchToProps = {
+  addToBasketAction,
+}
+
+export default connect(null, mapDispatchToProps)(PizzaComponent)
