@@ -3,6 +3,7 @@ import { fetchResources } from "./utils/helpers"
 const ADD_TO_BASKET = "ADD_TO_BASKET"
 const FETCH_PIZZA = "FETCH_PIZZA"
 const FETCH_EXTRAS = "FETCH_EXTRAS"
+const FETCH_SERVICES = "FETCH SERVICES"
 
 const addToBasketAction = (payload) => {
   return {
@@ -27,4 +28,21 @@ const fetchExtras = () => async (dispatch) => {
   })
 }
 
-export { ADD_TO_BASKET, FETCH_PIZZA, FETCH_EXTRAS, addToBasketAction, fetchPizza, fetchExtras }
+const fetchServices = () => async (dispatch) => {
+  const data = await fetchResources("http://localhost:3000/services", "GET")
+  return dispatch({
+    type: FETCH_SERVICES,
+    payload: data.services,
+  })
+}
+
+export {
+  ADD_TO_BASKET,
+  FETCH_PIZZA,
+  FETCH_EXTRAS,
+  FETCH_SERVICES,
+  addToBasketAction,
+  fetchPizza,
+  fetchExtras,
+  fetchServices,
+}

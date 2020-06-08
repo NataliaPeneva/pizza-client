@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { fetchResources, renderState, renderButton } from "../utils/helpers"
+import { renderState, renderButton } from "../utils/helpers"
 import { Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
 import { connect } from "react-redux"

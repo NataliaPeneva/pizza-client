@@ -1,21 +1,12 @@
 import React, { Component } from "react"
-import { fetchResources, renderState, renderButton } from "../utils/helpers"
+import { renderState, renderButton } from "../utils/helpers"
 import { Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
 import { connect } from "react-redux"
-import { addToBasketAction } from "../actions"
+import { addToBasketAction, fetchServices } from "../actions"
 class ServicesComponent extends Component {
-  state = {
-    services: null,
-  }
-
   componentDidMount() {
-    this.fetchServices()
-  }
-
-  fetchServices = async () => {
-    const data = await fetchResources("http://localhost:3000/services", "GET")
-    return this.setState({ services: data.services })
+    this.props.fetchServices()
   }
 
   addToBasket = (item) => {
@@ -23,12 +14,12 @@ class ServicesComponent extends Component {
   }
 
   render() {
-    if (!this.state.services) {
+    if (!this.props.services) {
       return <div>Loading Services</div>
     }
     return (
       <div>
-        <div>{renderState(this.state.services, renderButton, this.addToBasket)}</div>
+        <div>{renderState(this.props.services, renderButton, this.addToBasket)}</div>
         <br />
         <br />
         <br />
@@ -49,7 +40,14 @@ class ServicesComponent extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    services: state.services,
+  }
+}
+
 const mapDispatchToProps = {
   addToBasketAction,
+  fetchServices,
 }
-export default connect(null, mapDispatchToProps)(ServicesComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(ServicesComponent)

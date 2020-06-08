@@ -1,5 +1,5 @@
 import { combineReducers } from "redux"
-import { ADD_TO_BASKET, FETCH_PIZZA, FETCH_EXTRAS } from "./actions"
+import { ADD_TO_BASKET, FETCH_PIZZA, FETCH_EXTRAS, FETCH_SERVICES } from "./actions"
 
 const initialBasketState = []
 
@@ -34,10 +34,22 @@ const extrasReducer = (state = initialExtrasState, action) => {
   }
 }
 
+const initialServicesState = []
+
+const servicesReducer = (state = initialServicesState, action) => {
+  switch (action.type) {
+    case FETCH_SERVICES:
+      return [...state, ...action.payload]
+    default:
+      return state
+  }
+}
+
 const combinedReducer = combineReducers({
   basket: basketReducer,
   pizza: pizzaReducer,
   extras: extrasReducer,
+  services: servicesReducer,
 })
 
 export default combinedReducer
