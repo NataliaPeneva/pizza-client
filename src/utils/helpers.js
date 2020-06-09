@@ -2,10 +2,14 @@ import React from "react"
 import axios from "axios"
 import Button from "@material-ui/core/Button"
 
-const fetchResources = (url, method) => {
+const fetchResources = (url, method, data) => {
   const axiosOptions = {
     url: url,
     method: method,
+  }
+
+  if (data) {
+    axiosOptions.data = data
   }
 
   return axios(axiosOptions)

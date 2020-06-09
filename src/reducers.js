@@ -1,5 +1,5 @@
 import { combineReducers } from "redux"
-import { ADD_TO_BASKET, FETCH_PIZZA, FETCH_EXTRAS, FETCH_SERVICES } from "./actions"
+import { ADD_TO_BASKET, FETCH_PIZZA, FETCH_EXTRAS, FETCH_SERVICES, AUTH_REGISTER } from "./actions"
 
 const initialBasketState = []
 
@@ -45,11 +45,23 @@ const servicesReducer = (state = initialServicesState, action) => {
   }
 }
 
+const initialAuthState = {}
+
+const authReducer = (state = initialAuthState, action) => {
+  switch (action.type) {
+    case AUTH_REGISTER:
+      return { ...state, ...action.payload }
+    default:
+      return state
+  }
+}
+
 const combinedReducer = combineReducers({
   basket: basketReducer,
   pizza: pizzaReducer,
   extras: extrasReducer,
   services: servicesReducer,
+  auth: authReducer,
 })
 
 export default combinedReducer

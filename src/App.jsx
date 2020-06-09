@@ -1,14 +1,14 @@
 import "./App.css"
 import React, { Component } from "react"
-import PizzaComponent from "./components/PizzaComponent"
 import { Switch, Route, Link } from "react-router-dom"
 import Button from "@material-ui/core/Button"
 import { connect } from "react-redux"
 
+import PizzaComponent from "./components/PizzaComponent"
 import ExtrasComponent from "./components/ExtrasComponent"
 import ServicesComponent from "./components/ServicesComponent"
 import BasketComponent from "./components/BasketComponent"
-
+import AuthRegisterComponent from "./components/AuthRegisterComponent"
 class App extends Component {
   render() {
     return (
@@ -44,6 +44,11 @@ class App extends Component {
               exact
               path="/services"
               render={() => <ServicesComponent addItemToBasket={this.addItemToBasket} />}
+            />
+            <Route
+              exact
+              path="/auth/register"
+              render={() => <AuthRegisterComponent addItemToBasket={this.addItemToBasket} />}
             />
           </Switch>
         </div>
