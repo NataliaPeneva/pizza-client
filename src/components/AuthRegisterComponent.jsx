@@ -11,7 +11,6 @@ class AuthRegisterComponent extends Component {
   }
 
   handleChange = (event) => {
-    console.log("event", event.target.value)
     this.setState({
       [event.target.name]: event.target.value,
     })
@@ -37,6 +36,7 @@ class AuthRegisterComponent extends Component {
             label="Password"
             variant="outlined"
             InputProps={{ name: "password" }}
+            onChange={(event) => this.handleChange(event)}
           />
         </div>
         <Button

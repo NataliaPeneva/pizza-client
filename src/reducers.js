@@ -1,5 +1,12 @@
 import { combineReducers } from "redux"
-import { ADD_TO_BASKET, FETCH_PIZZA, FETCH_EXTRAS, FETCH_SERVICES, AUTH_REGISTER } from "./actions"
+import {
+  ADD_TO_BASKET,
+  FETCH_PIZZA,
+  FETCH_EXTRAS,
+  FETCH_SERVICES,
+  AUTH_REGISTER,
+  AUTH_LOGIN,
+} from "./actions"
 
 const initialBasketState = []
 
@@ -45,11 +52,16 @@ const servicesReducer = (state = initialServicesState, action) => {
   }
 }
 
-const initialAuthState = {}
+const initialAuthState = { token: null }
 
 const authReducer = (state = initialAuthState, action) => {
   switch (action.type) {
     case AUTH_REGISTER:
+      return { ...state, ...action.payload }
+    case AUTH_LOGIN:
+      if (action.payload.success) {
+        return { ...state, token: action.payload.success }
+      }
       return { ...state, ...action.payload }
     default:
       return state

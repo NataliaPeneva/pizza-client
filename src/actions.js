@@ -5,6 +5,7 @@ const FETCH_PIZZA = "FETCH_PIZZA"
 const FETCH_EXTRAS = "FETCH_EXTRAS"
 const FETCH_SERVICES = "FETCH SERVICES"
 const AUTH_REGISTER = "AUTH REGISTER"
+const AUTH_LOGIN = "AUTH LOGIN"
 
 const addToBasketAction = (payload) => {
   return {
@@ -46,15 +47,26 @@ const authRegisterAction = (registerData) => async (dispatch) => {
   })
 }
 
+const authLoginAction = (registerData) => async (dispatch) => {
+  const data = await fetchResources("http://localhost:3000/login", "POST", registerData)
+
+  return dispatch({
+    type: AUTH_LOGIN,
+    payload: data,
+  })
+}
+
 export {
   ADD_TO_BASKET,
   FETCH_PIZZA,
   FETCH_EXTRAS,
   FETCH_SERVICES,
   AUTH_REGISTER,
+  AUTH_LOGIN,
   addToBasketAction,
   fetchPizza,
   fetchExtras,
   fetchServices,
   authRegisterAction,
+  authLoginAction,
 }

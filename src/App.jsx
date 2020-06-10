@@ -9,6 +9,7 @@ import ExtrasComponent from "./components/ExtrasComponent"
 import ServicesComponent from "./components/ServicesComponent"
 import BasketComponent from "./components/BasketComponent"
 import AuthRegisterComponent from "./components/AuthRegisterComponent"
+import AuthLoginComponent from "./components/AuthLoginComponent"
 class App extends Component {
   render() {
     return (
@@ -30,26 +31,11 @@ class App extends Component {
                 </Button>
               </Link>
             </Route>
-            <Route
-              exact
-              path="/pizza"
-              render={() => <PizzaComponent addItemToBasket={this.addItemToBasket} />}
-            />
-            <Route
-              exact
-              path="/extras"
-              render={() => <ExtrasComponent addItemToBasket={this.addItemToBasket} />}
-            />
-            <Route
-              exact
-              path="/services"
-              render={() => <ServicesComponent addItemToBasket={this.addItemToBasket} />}
-            />
-            <Route
-              exact
-              path="/auth/register"
-              render={() => <AuthRegisterComponent addItemToBasket={this.addItemToBasket} />}
-            />
+            <Route exact path="/pizza" render={() => <PizzaComponent />} />
+            <Route exact path="/extras" render={() => <ExtrasComponent />} />
+            <Route exact path="/services" render={() => <ServicesComponent />} />
+            <Route exact path="/auth/register" render={() => <AuthRegisterComponent />} />
+            <Route exact path="/auth/login" render={() => <AuthLoginComponent />} />
           </Switch>
         </div>
       </div>
