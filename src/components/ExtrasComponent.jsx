@@ -24,7 +24,7 @@ class ExtrasComponent extends Component {
         <br />
         <br />
         <br />
-        <Link to="/services">
+        <Link to="/order/services">
           <Button
             variant="contained"
             style={{

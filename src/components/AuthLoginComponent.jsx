@@ -23,7 +23,7 @@ class AuthLoginComponent extends Component {
 
   render() {
     if (this.props.auth.token) {
-      return <Redirect to={"/pizza"} />
+      return <Redirect to={"/order/pizza"} />
     }
 
     return (

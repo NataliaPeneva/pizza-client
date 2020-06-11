@@ -19,7 +19,7 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path="/">
-              <Link to="/pizza">
+              <Link to="/order/pizza">
                 <Button
                   variant="contained"
                   style={{
@@ -31,9 +31,9 @@ class App extends Component {
                 </Button>
               </Link>
             </Route>
-            <Route exact path="/pizza" render={() => <PizzaComponent />} />
-            <Route exact path="/extras" render={() => <ExtrasComponent />} />
-            <Route exact path="/services" render={() => <ServicesComponent />} />
+            <Route exact path="/order/pizza" render={() => <PizzaComponent />} />
+            <Route exact path="/order/extras" render={() => <ExtrasComponent />} />
+            <Route exact path="/order/services" render={() => <ServicesComponent />} />
             <Route exact path="/auth/register" render={() => <AuthRegisterComponent />} />
             <Route exact path="/auth/login" render={() => <AuthLoginComponent />} />
           </Switch>

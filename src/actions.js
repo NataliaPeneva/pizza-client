@@ -19,7 +19,7 @@ const fetchPizza = () => async (dispatch, getState) => {
   const auth = state.auth
   const token = auth.token || ""
 
-  const data = await fetchResources("http://localhost:3000/pizza", "GET", { token })
+  const data = await fetchResources("http://localhost:3000/order/pizza", "GET", { token })
   return dispatch({
     type: FETCH_PIZZA,
     payload: data.pizza,
@@ -31,7 +31,7 @@ const fetchExtras = () => async (dispatch, getState) => {
   const auth = state.auth
   const token = auth.token || ""
 
-  const data = await fetchResources("http://localhost:3000/extras", "GET", { token })
+  const data = await fetchResources("http://localhost:3000/order/extras", "GET", { token })
   return dispatch({
     type: FETCH_EXTRAS,
     payload: data.extras,
@@ -43,7 +43,7 @@ const fetchServices = () => async (dispatch, getState) => {
   const auth = state.auth
   const token = auth.token || ""
 
-  const data = await fetchResources("http://localhost:3000/services", "GET", { token })
+  const data = await fetchResources("http://localhost:3000/order/services", "GET", { token })
   return dispatch({
     type: FETCH_SERVICES,
     payload: data.services,
@@ -51,7 +51,7 @@ const fetchServices = () => async (dispatch, getState) => {
 }
 
 const authRegisterAction = (registerData) => async (dispatch) => {
-  const data = await fetchResources("http://localhost:3000/register", "POST", {
+  const data = await fetchResources("http://localhost:3000/auth/register", "POST", {
     data: registerData,
   })
 
@@ -62,7 +62,7 @@ const authRegisterAction = (registerData) => async (dispatch) => {
 }
 
 const authLoginAction = (loginData) => async (dispatch) => {
-  const data = await fetchResources("http://localhost:3000/login", "POST", { data: loginData })
+  const data = await fetchResources("http://localhost:3000/auth/login", "POST", { data: loginData })
 
   return dispatch({
     type: AUTH_LOGIN,

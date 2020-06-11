@@ -28,7 +28,7 @@ class PizzaComponent extends Component {
         <br />
         <div>{renderState(this.props.pizza, renderButton, this.addToBasket)}</div>
         <br />
-        <Link to="/extras">
+        <Link to="/order/extras">
           <Button
             variant="contained"
             style={{
