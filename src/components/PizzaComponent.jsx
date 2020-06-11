@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { renderState, renderButton } from "../utils/helpers"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import Button from "@material-ui/core/Button"
 import { connect } from "react-redux"
 import { addToBasketAction, fetchPizza } from "../actions"
@@ -15,9 +15,14 @@ class PizzaComponent extends Component {
   }
 
   render() {
+    if (!this.props.auth.token) {
+      return <Redirect to={"/auth/login"} />
+    }
+
     if (!this.props.pizza) {
       return <div>Loading Pizza Base</div>
     }
+
     return (
       <div>
         <br />
@@ -43,6 +48,7 @@ class PizzaComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     pizza: state.pizza,
+    auth: state.auth,
   }
 }
 

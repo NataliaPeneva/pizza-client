@@ -11,6 +11,7 @@ import {
 const initialBasketState = []
 
 const basketReducer = (state = initialBasketState, action) => {
+  if (!action.payload) return state
   switch (action.type) {
     case ADD_TO_BASKET:
       return [...state, action.payload]
@@ -22,6 +23,7 @@ const basketReducer = (state = initialBasketState, action) => {
 const initialPizzaState = []
 
 const pizzaReducer = (state = initialPizzaState, action) => {
+  if (!action.payload) return state
   switch (action.type) {
     case FETCH_PIZZA:
       return [...state, ...action.payload]
@@ -33,6 +35,7 @@ const pizzaReducer = (state = initialPizzaState, action) => {
 const initialExtrasState = []
 
 const extrasReducer = (state = initialExtrasState, action) => {
+  if (!action.payload) return state
   switch (action.type) {
     case FETCH_EXTRAS:
       return [...state, ...action.payload]
@@ -44,6 +47,7 @@ const extrasReducer = (state = initialExtrasState, action) => {
 const initialServicesState = []
 
 const servicesReducer = (state = initialServicesState, action) => {
+  if (!action.payload) return state
   switch (action.type) {
     case FETCH_SERVICES:
       return [...state, ...action.payload]

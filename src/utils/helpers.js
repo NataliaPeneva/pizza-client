@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import Button from "@material-ui/core/Button"
 
-const fetchResources = (url, method, data) => {
+const fetchResources = (url, method, { data, token }) => {
   const axiosOptions = {
     url: url,
     method: method,
@@ -10,6 +10,12 @@ const fetchResources = (url, method, data) => {
 
   if (data) {
     axiosOptions.data = data
+  }
+
+  if (token) {
+    axiosOptions.headers = {
+      Authorization: `Bearer ${token}`,
+    }
   }
 
   return axios(axiosOptions)
